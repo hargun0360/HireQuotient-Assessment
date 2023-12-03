@@ -6,10 +6,6 @@ import {
   GridRowModes,
   GridActionsCellItem,
   GridRowEditStopReasons,
-  useGridApiContext,
-  useGridSelector,
-  gridPageCountSelector,
-  gridPageSelector,
 } from "@mui/x-data-grid";
 import {
   Container,
@@ -22,6 +18,9 @@ import {
 import { columnHeading } from '../Constant';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeSharpIcon from '@mui/icons-material/ModeSharp';
+import { CustomPagination } from '../Components/CustomPagination';
+import Spinner from '../Components/Spinner'
+import { Stack } from "@mui/material";
 
 
 const AdminPage = () => {
@@ -30,7 +29,12 @@ const AdminPage = () => {
   const [input, setInput] = useState("");
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
   const [rowModesModel, setRowModesModel] = useState({});
-  
+  const [rows, setRows] = useState(fetchData);
+
+  useEffect(() => {
+    setRows(fetchData);
+  }, [fetchData]);
+
   
   useEffect(() => {
     if (data) {
@@ -174,7 +178,7 @@ const AdminPage = () => {
         components={{
           NoRowsOverlay: () => (
             <Stack height="100%" alignItems="center" justifyContent="center">
-              No User Found !!
+              <Spinner />
             </Stack>
           ),
         }}
@@ -199,7 +203,7 @@ const AdminPage = () => {
             user.role.toLowerCase().includes(input.toLowerCase())
           );
         })}
-        columns={columns.concat(actionsColumn)}
+        columns={columnHeading.concat(actionsColumn)}
         pageSizeOptions={[10]}
         editMode="row"
         rowModesModel={rowModesModel}
