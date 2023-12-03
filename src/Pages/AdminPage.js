@@ -1,6 +1,6 @@
-import React , {useEffect , useState} from 'react'
-import useFetchData from '../Hooks/useFetchData'
-import { FETCH_DATA_URL } from '../Constant';
+import React, { useEffect, useState } from "react";
+import useFetchData from "../Hooks/useFetchData";
+import { FETCH_DATA_URL } from "../Constant";
 import {
   DataGrid,
   GridRowModes,
@@ -14,14 +14,24 @@ import {
   DropdownMenu,
   DropdownToggle,
   UncontrolledDropdown,
-} from "reactstrap"
-import { columnHeading } from '../Constant';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeSharpIcon from '@mui/icons-material/ModeSharp';
-import { CustomPagination } from '../Components/CustomPagination';
-import Spinner from '../Components/Spinner'
+} from "reactstrap";
+import { columnHeading } from "../Constant";
+// import DeleteIcon from '@mui/icons-material/Delete';
+// import ModeSharpIcon from '@mui/icons-material/ModeSharp';
+import { CustomPagination } from "../Components/CustomPagination";
+import Spinner from "../Components/Spinner";
 import { Stack } from "@mui/material";
+import SearchBar from "../Components/SearchBar";
 
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
+import PersonRemove from "@mui/icons-material/PersonRemove";
+import ModeSharpIcon from "@mui/icons-material/ModeSharp";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
 
 const AdminPage = () => {
   const data = useFetchData(FETCH_DATA_URL);
@@ -35,12 +45,17 @@ const AdminPage = () => {
     setRows(fetchData);
   }, [fetchData]);
 
-  
   useEffect(() => {
     if (data) {
       setFetchData(data);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (input === "") {
+      setFetchData(data);
+    }
+  }, [input]);
 
   const handleDeleteMultiple = (ids) => {
     const filteredRows = fetchData.filter((row) => !ids.includes(row.id));
@@ -105,9 +120,6 @@ const AdminPage = () => {
     },
   ];
 
-  
-
-
   const searchHandler = (userInput) => {
     setInput(userInput);
   };
@@ -155,67 +167,75 @@ const AdminPage = () => {
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
+if(fetchData && fetchData.length > 0 ){
+  return (
+    <>
+        <div className="datatable">
+          <div className="datatableTitle">
+            <SearchBar searchHandler={searchHandler} />
+            <button onClick={deleteHandler} className="button">
+              <DeleteIcon />
+            </button>
+          </div>
+          <DataGrid
+            className="datagrid"
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+            }}
+            slots={{
+              pagination: CustomPagination,
+            }}
+            components={{
+              NoRowsOverlay: () => (
+                <Stack
+                  height="100%"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Spinner />
+                </Stack>
+              ),
+            }}
+            sx={{
+              "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                outline: "none !important",
+              },
+              "&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within": {
+                outline: "none",
+              },
+            }}
+            checkboxSelection
+            getRowClassName={(params) => `fade-in-row`}
+            showCellVerticalBorder
+            showColumnVerticalBorder
+            autoHeight
+            rows={rows.filter((user) => {
+              if (input === "") return user;
+              return (
+                user.name.toLowerCase().includes(input.toLowerCase()) ||
+                user.email.toLowerCase().includes(input.toLowerCase()) ||
+                user.role.toLowerCase().includes(input.toLowerCase())
+              );
+            })}
+            columns={columnHeading.concat(actionsColumn)}
+            pageSizeOptions={[10]}
+            editMode="row"
+            rowModesModel={rowModesModel}
+            onRowModesModelChange={handleRowModesModelChange}
+            onRowEditStop={handleRowEditStop}
+            processRowUpdate={processRowUpdate}
+            onRowSelectionModelChange={(newRowSelectionModel) => {
+              setRowSelectionModel(newRowSelectionModel);
+            }}
+          />
+        </div>
+    </>
+  )}
+  else{
+    return (<><Spinner /></>)
+  } 
+};
 
-
-  return (<>
-    <div className="datatable">
-      <div className="datatableTitle">
-        <SearchBar searchHandler={searchHandler} />
-        <button onClick={deleteHandler} className="button">
-          <DeleteIcon />
-        </button>
-      </div>
-      <DataGrid
-        className="datagrid"
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
-          },
-        }}
-        slots={{
-          pagination: CustomPagination,
-        }}
-        components={{
-          NoRowsOverlay: () => (
-            <Stack height="100%" alignItems="center" justifyContent="center">
-              <Spinner />
-            </Stack>
-          ),
-        }}
-        sx={{
-          "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-            outline: "none !important",
-          },
-          "&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within": {
-            outline: "none",
-          },
-        }}
-        checkboxSelection
-        getRowClassName={(params) => `fade-in-row`}
-        showCellVerticalBorder
-        showColumnVerticalBorder
-        autoHeight
-        rows={rows.filter((user) => {
-          if (input === "") return user;
-          return (
-            user.name.toLowerCase().includes(input.toLowerCase()) ||
-            user.email.toLowerCase().includes(input.toLowerCase()) ||
-            user.role.toLowerCase().includes(input.toLowerCase())
-          );
-        })}
-        columns={columnHeading.concat(actionsColumn)}
-        pageSizeOptions={[10]}
-        editMode="row"
-        rowModesModel={rowModesModel}
-        onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
-        processRowUpdate={processRowUpdate}
-        onRowSelectionModelChange={(newRowSelectionModel) => {
-          setRowSelectionModel(newRowSelectionModel);
-        }}
-      />
-    </div>
-  </>);
-}
-
-export default AdminPage
+export default AdminPage;
