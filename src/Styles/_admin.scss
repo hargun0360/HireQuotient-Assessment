@@ -1,0 +1,78 @@
+.fade-in-row {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: #f7f7f760;
+    transform: translateY(-40px);
+    animation: fadeIn 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    color: black;
+  }
+  .fade-in-row:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .fade-in-row:nth-child(2) {
+    animation-delay: 0.05s;
+  }
+  .fade-in-row:nth-child(3) {
+    animation-delay: 0.1s;
+  }
+  .fade-in-row:nth-child(4) {
+    animation-delay: 0.15s;
+  }
+  .fade-in-row:nth-child(5) {
+    animation-delay: 0.2s;
+  }
+  .fade-in-row:nth-child(6) {
+    animation-delay: 0.25s;
+  }
+  .fade-in-row:nth-child(7) {
+    animation-delay: 0.3s;
+  }
+  .fade-in-row:nth-child(8) {
+    animation-delay: 0.35s;
+  }
+  .fade-in-row:nth-child(9) {
+    animation-delay: 0.4s;
+  }
+  .fade-in-row:nth-child(10) {
+    animation-delay: 0.45s;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+  .datatable {
+    padding: 20px 20px 0px 20px;
+  }
+  
+  .datagrid {
+    font-size: 17px;
+  }
+  
+  .datatableTitle {
+    width: 100%;
+    font-size: 14px;
+    color: black;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .button {
+    color: white;
+    padding: 6px 10px;
+    margin-top: 8px;
+    background: red;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  

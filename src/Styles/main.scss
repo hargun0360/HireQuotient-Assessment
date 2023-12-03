@@ -1,2 +1,40 @@
 @import "config";
 @import "admin";
+
+.search-container {
+    float: right;
+  }
+  
+  .search-container form{
+      display: flex;
+  }
+  
+  .search-container input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: 1px solid #8a8a8a60;
+    border-radius: 4px;
+  }
+  
+  .search-container input[type=text]:focus{
+      outline: none;
+  }
+  
+  .search-container button {
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .search-container button:hover {
+    background: #008cff;
+    color: #ddd;
+    transition: all 0.2s;
+  }
