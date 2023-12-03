@@ -7,17 +7,7 @@ import {
   GridActionsCellItem,
   GridRowEditStopReasons,
 } from "@mui/x-data-grid";
-import {
-  Container,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  UncontrolledDropdown,
-} from "reactstrap";
 import { columnHeading } from "../Constant";
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import ModeSharpIcon from '@mui/icons-material/ModeSharp';
 import { CustomPagination } from "../Components/CustomPagination";
 import Spinner from "../Components/Spinner";
 import { Stack } from "@mui/material";
@@ -189,18 +179,10 @@ const AdminPage = () => {
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Spinner />
                 </Stack>
               ),
             }}
-            sx={{
-              "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-                outline: "none !important",
-              },
-              "&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within": {
-                outline: "none",
-              },
-            }}
+           
             checkboxSelection
             getRowClassName={(params) => `fade-in-row`}
             showCellVerticalBorder
