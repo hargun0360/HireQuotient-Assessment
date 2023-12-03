@@ -22,13 +22,7 @@ import { CustomPagination } from "../Components/CustomPagination";
 import Spinner from "../Components/Spinner";
 import { Stack } from "@mui/material";
 import SearchBar from "../Components/SearchBar";
-
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
-import PersonRemove from "@mui/icons-material/PersonRemove";
-import ModeSharpIcon from "@mui/icons-material/ModeSharp";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
@@ -102,7 +96,7 @@ const AdminPage = () => {
         return [
           <GridActionsCellItem
             key="edit"
-            icon={<EditIcon />}
+            icon={<EditIcon style={{ color: 'blue' }} />}
             label="Edit"
             className="textPrimary"
             onClick={handleEditClick(params.id)}
@@ -110,7 +104,7 @@ const AdminPage = () => {
           />,
           <GridActionsCellItem
             key="delete"
-            icon={<DeleteIcon />}
+            icon={<DeleteIcon style={{ color: 'red' }}/>}
             label="Delete"
             onClick={handleDeleteClick(params.id)}
             color="inherit"
@@ -167,16 +161,17 @@ const AdminPage = () => {
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
-if(fetchData && fetchData.length > 0 ){
-  return (
-    <>
+  if (fetchData && fetchData.length > 0) {
+    return (
+      <>
         <div className="datatable">
-          <div className="datatableTitle">
+          <div className="datatableTitle search-bar">
             <SearchBar searchHandler={searchHandler} />
             <button onClick={deleteHandler} className="button">
               <DeleteIcon />
             </button>
           </div>
+
           <DataGrid
             className="datagrid"
             initialState={{
@@ -231,11 +226,15 @@ if(fetchData && fetchData.length > 0 ){
             }}
           />
         </div>
-    </>
-  )}
-  else{
-    return (<><Spinner /></>)
-  } 
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Spinner />
+      </>
+    );
+  }
 };
 
 export default AdminPage;

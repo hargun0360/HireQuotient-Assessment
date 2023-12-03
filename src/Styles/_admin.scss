@@ -76,3 +76,46 @@
     border-radius: 4px;
   }
   
+  
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; 
+  }
+  
+ 
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+
+  .datagrid:hover {
+    background-color: #f2f2f2; 
+  }
+  
+
+  .datagrid .MuiDataGrid-row:hover {
+    background-color: #e8f4fd; 
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #f44336; 
+    transition: background-color 0.3s ease;
+  }
+
+  .button {
+    background-color: #dc3545;
+ 
+  }
+  
+  
+  .datagrid {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  
+  .datagrid:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  

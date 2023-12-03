@@ -12,6 +12,7 @@ export function CustomPagination() {
     const pageCount = useGridSelector(apiRef, gridPageCountSelector);
 
     return (
+        <div className="pagination-container">
       <Pagination
         color="primary"
         variant="outlined"
@@ -23,5 +24,6 @@ export function CustomPagination() {
         renderItem={(props2) => <PaginationItem {...props2} disableRipple />}
         onChange={(event, value) => apiRef.current.setPage(value - 1)}
       />
+      </div>
     );
   } 
